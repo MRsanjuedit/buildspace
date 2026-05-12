@@ -32,20 +32,21 @@ export default function LetterPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white w-full">
       {/* Main Content */}
-      <div className="max-w-3xl mx-auto px-6 py-16">
-        {/* Audio Player */}
-        <div className="bg-gray-200 rounded-lg p-6 mb-16 flex items-center gap-6">
-          <audio
-            src="https://framerusercontent.com/assets/s6Kcvm0lGpVdIimLMjrCJjPgd28.mp3"
-            controls
-            className="flex-1"
-          />
-        </div>
+      <div className="w-full px-4 sm:px-6 lg:px-0 py-8 sm:py-12 lg:py-16">
+        <div className="max-w-2xl lg:max-w-3xl mx-auto">
+          {/* Audio Player */}
+          <div className="bg-gray-200 rounded-lg p-4 sm:p-6 mb-10 sm:mb-16 flex items-center gap-4 sm:gap-6">
+            <audio
+              src="https://framerusercontent.com/assets/s6Kcvm0lGpVdIimLMjrCJjPgd28.mp3"
+              controls
+              className="w-full flex-1"
+            />
+          </div>
 
-        {/* Letter Content */}
-        <div className="space-y-8 text-lg leading-relaxed text-gray-800 font-medium">
+          {/* Letter Content */}
+          <div className="space-y-6 sm:space-y-8 text-base sm:text-lg leading-relaxed text-gray-800 font-medium">
           <p>
             [hi play above track as you read this]
             <br />
@@ -301,10 +302,11 @@ export default function LetterPage() {
             <br />— sanju
           </p>
         </div>
+        </div>
       </div>
 
       {/* Thank You Video Footer */}
-      <div className="w-screen h-screen flex items-center justify-center bg-black">
+      <div className="w-screen aspect-video md:aspect-auto md:h-screen flex items-center justify-center bg-black">
         <video
           src="/ty_viedio.mp4"
           autoPlay

@@ -39,7 +39,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen bg-black overflow-hidden">
+    <div className="relative w-full min-h-screen bg-black overflow-hidden">
       {/* PostHog Analytics Script */}
       <Script
         id="posthog-script"
@@ -72,13 +72,13 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <div className="flex w-full h-full">
+      <div className="flex flex-col md:flex-row w-full min-h-screen">
         {/* Left Content */}
-        <div className="w-1/3 h-full flex flex-col justify-end px-16 py-12 border-r border-gray-800/50">
+        <div className="w-full md:w-1/3 flex flex-col justify-end px-6 sm:px-8 md:px-16 py-8 md:py-12 md:border-r border-gray-800/50 order-2 md:order-1">
           <div className="max-w-md">
             {/* Heading */}
             <h1
-              className="text-6xl font-black text-white mb-6 leading-tight lowercase"
+              className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4 md:mb-6 leading-tight lowercase"
               style={{ fontFamily: 'Manrope, sans-serif', letterSpacing: '-0.04em' }}
             >
               hi. this was buildspace.
@@ -86,7 +86,7 @@ export default function Home() {
 
             {/* Description */}
             <p
-              className="text-xl text-gray-400/60 mb-8 leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-gray-400/60 mb-6 md:mb-8 leading-relaxed"
               style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 500 }}
             >
               we were the biggest school in the world for people who wanted to work on their own ideas — ty for the memories. love you.
@@ -97,7 +97,7 @@ export default function Home() {
               {/* Primary Button */}
               <a
                 href="/letter"
-                className="block w-full bg-white text-black font-bold text-center py-4 hover:bg-gray-100 transition-colors duration-200"
+                className="block w-full bg-white text-black font-bold text-center py-3 sm:py-4 text-sm sm:text-base hover:bg-gray-100 transition-colors duration-200"
                 style={{ fontFamily: 'Manrope, sans-serif', fontSize: '20px' }}
               >
                 read final letter
@@ -107,7 +107,7 @@ export default function Home() {
         </div>
 
         {/* Right Video */}
-        <div className="absolute top-0 right-0 w-2/3 h-full flex items-center justify-center p-0">
+        <div className="w-full md:w-2/3 relative min-h-64 md:min-h-screen flex items-center justify-center p-4 md:p-0 order-1 md:order-2">
           <video
             src="https://framerusercontent.com/assets/sRXQsZpCuTpukMUfotGcRUuvg.mp4"
             autoPlay
