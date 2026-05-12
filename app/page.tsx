@@ -65,16 +65,16 @@ export default function Home() {
       {/* Header with Logo */}
       <header className="absolute top-0 left-0 right-0 h-16 z-20 flex items-center px-6">
         <div className="w-10 h-10">
-          <svg viewBox="0 0 235 200" className="w-full h-full fill-black">
+          {/* <svg viewBox="0 0 235 200" className="w-full h-full fill-black">
             <path d="m94.005 16.289 9.332-9.734c6.691-7.787 19.567-9.414 27.769-.608l98.837 106.12c8.145 8.745 6.021 22.797-4.345 28.744l-98.837 56.701c-6.811 3.907-14.546 2.957-20.123-1.067L9.325 140.618c-10.366-5.947-12.49-19.999-4.345-28.744a11.812 11.812 0 0 1 14.55-2.179l87.108 50.119v-37.648L49.802 89.674c-8.026-4.643-9.659-15.539-3.348-22.33l.012-.013.009-.01a14.441 14.441 0 0 1 17.779-2.654l42.384 24.013V52.34l-13.484-8.485c-8.26-4.77-15.716-9.779-9.215-16.758l10.066-10.808Z" />
-          </svg>
+          </svg> */}
         </div>
       </header>
 
       {/* Hero Section */}
       <div className="flex flex-col md:flex-row w-full min-h-screen">
         {/* Left Content */}
-        <div className="w-full md:w-1/3 flex flex-col justify-end px-6 sm:px-8 md:px-16 py-8 md:py-12 md:border-r border-gray-800/50 order-2 md:order-1">
+        <div className="w-full md:w-1/3 h-1/3 md:h-full flex flex-col justify-end px-6 sm:px-8 md:px-16 py-8 md:py-12 md:border-r border-gray-800/50 order-2 md:order-1">
           <div className="max-w-md">
             {/* Heading */}
             <h1
@@ -107,7 +107,7 @@ export default function Home() {
         </div>
 
         {/* Right Video */}
-        <div className="w-full md:w-2/3 relative min-h-64 md:min-h-screen flex items-center justify-center p-4 md:p-0 order-1 md:order-2">
+        <div className="w-full md:w-2/3 h-2/3 md:h-full relative flex items-center justify-center p-4 md:p-0 order-1 md:order-2">
           <video
             src="https://framerusercontent.com/assets/sRXQsZpCuTpukMUfotGcRUuvg.mp4"
             autoPlay
