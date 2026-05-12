@@ -47,7 +47,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{
           __html: `
             !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-            posthog.init('phc_cvM8JgK6STaggawSqoXz2l83uEKpEYF2dWSsIgoOGe4',{api_host:"https://sage.buildspace.so/ingest"})
+            posthog.init('phc_cvM8JgK6STaggawSqoXz2l83uEKpEYF2dWSsIgoOGe4',{api_host:"https://sage.boldspace.so/ingest"})
           `,
         }}
       />
@@ -72,29 +72,27 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <div className="w-full h-screen sm:min-h-screen flex flex-col sm:flex-row">
-        {/* Right Video - appears first on mobile (top) */}
-        <div className="w-full sm:w-2/3 h-2/3 sm:h-full relative flex items-center justify-center p-4 sm:p-0 order-1 sm:order-2">
-          <video
-            src="https://framerusercontent.com/assets/sRXQsZpCuTpukMUfotGcRUuvg.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-            style={{ opacity: 0.5 }}
-          />
-        </div>
+      <div className="relative w-full h-screen bg-black overflow-hidden flex items-end">
+        {/* Video Background */}
+        <video
+          src="https://framerusercontent.com/assets/sRXQsZpCuTpukMUfotGcRUuvg.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0.5 }}
+        />
 
-        {/* Left Content - appears second on mobile (bottom) */}
-        <div className="w-full sm:w-1/3 h-1/3 sm:h-full flex flex-col justify-end px-6 sm:px-8 md:px-16 py-8 sm:py-12 sm:border-r border-gray-800/50 order-2 sm:order-1">
+        {/* Text Overlay at Bottom */}
+        <div className="relative z-10 w-full px-6 sm:px-8 md:px-16 py-8 md:py-12 bg-gradient-to-t from-black via-black/80 to-transparent pb-16">
           <div className="max-w-md">
             {/* Heading */}
             <h1
               className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4 md:mb-6 leading-tight lowercase"
               style={{ fontFamily: 'Manrope, sans-serif', letterSpacing: '-0.04em' }}
             >
-              hi. this was buildspace.
+              hi. this was boldspace.
             </h1>
 
             {/* Description */}

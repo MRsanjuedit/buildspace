@@ -33,6 +33,28 @@ export default function LetterPage() {
 
   return (
     <div className="min-h-screen bg-white w-full">
+      {/* Logo */}
+      <header className="px-6 sm:px-8 md:px-16 py-6 sm:py-8">
+        <a href="/" className="text-xl md:text-2xl font-black text-black lowercase" style={{ fontFamily: 'Manrope, sans-serif', letterSpacing: '-0.04em' }}>
+          boldspace<span style={{
+            animation: 'colorChange 8s infinite'
+          }}>.</span>
+        </a>
+      </header>
+
+      <style jsx>{`
+        @keyframes colorChange {
+          0% { color: #000; }
+          25% { color: #0099ff; }
+          50% { color: #ff0066; }
+          75% { color: #00cc88; }
+          100% { color: #000; }
+        }
+        .dot-animation {
+          animation: colorChange 8s infinite;
+        }
+      `}</style>
+
       {/* Main Content */}
       <div className="w-full px-4 sm:px-6 lg:px-0 py-8 sm:py-12 lg:py-16">
         <div className="max-w-2xl lg:max-w-3xl mx-auto">
