@@ -72,9 +72,22 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <div className="flex flex-col md:flex-row w-full min-h-screen">
-        {/* Left Content */}
-        <div className="w-full md:w-1/3 h-1/3 md:h-full flex flex-col justify-end px-6 sm:px-8 md:px-16 py-8 md:py-12 md:border-r border-gray-800/50 order-2 md:order-1">
+      <div className="w-full h-screen sm:min-h-screen flex flex-col sm:flex-row">
+        {/* Right Video - appears first on mobile (top) */}
+        <div className="w-full sm:w-2/3 h-2/3 sm:h-full relative flex items-center justify-center p-4 sm:p-0 order-1 sm:order-2">
+          <video
+            src="https://framerusercontent.com/assets/sRXQsZpCuTpukMUfotGcRUuvg.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            style={{ opacity: 0.5 }}
+          />
+        </div>
+
+        {/* Left Content - appears second on mobile (bottom) */}
+        <div className="w-full sm:w-1/3 h-1/3 sm:h-full flex flex-col justify-end px-6 sm:px-8 md:px-16 py-8 sm:py-12 sm:border-r border-gray-800/50 order-2 sm:order-1">
           <div className="max-w-md">
             {/* Heading */}
             <h1
@@ -104,19 +117,6 @@ export default function Home() {
               </a>
             </div>
           </div>
-        </div>
-
-        {/* Right Video */}
-        <div className="w-full md:w-2/3 h-2/3 md:h-full relative flex items-center justify-center p-4 md:p-0 order-1 md:order-2">
-          <video
-            src="https://framerusercontent.com/assets/sRXQsZpCuTpukMUfotGcRUuvg.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-            style={{ opacity: 0.5 }}
-          />
         </div>
       </div>
     </div>
