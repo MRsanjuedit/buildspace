@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import Script from 'next/script';
-import ReflectiveCard from './components/ReflectiveCard';
+import AsciiStory from './components/AsciiStory';
 
 export default function Home() {
   useEffect(() => {
@@ -195,30 +195,17 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ─── Right Panel — ReflectiveCard ─── */}
+      {/* ─── Right Panel — ASCII Story ─── */}
       <div
         style={{
           position: 'relative',
           flex: 1,
           height: '100%',
           backgroundColor: '#000',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          borderLeft: '1px solid rgba(0, 255, 136, 0.08)',
         }}
       >
-        <ReflectiveCard
-          overlayColor="rgba(0, 0, 0, 0.2)"
-          blurStrength={10}
-          glassDistortion={15}
-          metalness={0.8}
-          roughness={0.5}
-          displacementStrength={25}
-          noiseScale={1.5}
-          specularConstant={2.0}
-          grayscale={0.5}
-          color="#ffffff"
-        />
+        <AsciiStory />
       </div>
     </div>
   );
