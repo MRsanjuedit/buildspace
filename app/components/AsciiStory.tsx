@@ -18,7 +18,7 @@ const SCENES: Scene[] = [
   {
     episode: 'EP. 01',
     title: 'the scroll',
-    frameDuration: 700,
+    frameDuration: 900,
     frames: [
       {
         art: [
@@ -82,7 +82,7 @@ const SCENES: Scene[] = [
           '     /           \\  ',
           '    [ ─────────── ] ',
           '    [             ] ',
-          '    [  "there has ] ',
+          '    [  there has  ] ',
           '    [─to be more"─] ',
           '                    ',
         ],
@@ -93,7 +93,7 @@ const SCENES: Scene[] = [
   {
     episode: 'EP. 02',
     title: 'the idea',
-    frameDuration: 550,
+    frameDuration: 850,
     frames: [
       {
         art: [
@@ -168,7 +168,7 @@ const SCENES: Scene[] = [
   {
     episode: 'EP. 03',
     title: 'the wall',
-    frameDuration: 600,
+    frameDuration: 850,
     frames: [
       {
         art: [
@@ -202,7 +202,7 @@ const SCENES: Scene[] = [
           '    █ TOO EARLY █   ',
           '    ████████████    ',
         ],
-        subtitle: '"you\'re too early. someone already built that."',
+        subtitle: '"you\'re too early. wait until you\'re ready."',
       },
       {
         art: [
@@ -243,7 +243,7 @@ const SCENES: Scene[] = [
   {
     episode: 'EP. 04',
     title: 'the search',
-    frameDuration: 650,
+    frameDuration: 900,
     frames: [
       {
         art: [
@@ -260,7 +260,7 @@ const SCENES: Scene[] = [
           '        |- -|       ',
           '                    ',
         ],
-        subtitle: 'late nights. open tabs. half-finished projects.',
+        subtitle: 'late nights. open tabs.',
       },
       {
         art: [
@@ -301,7 +301,7 @@ const SCENES: Scene[] = [
   {
     episode: 'EP. 05',
     title: 'the signal',
-    frameDuration: 500,
+    frameDuration: 800,
     frames: [
       {
         art: [
@@ -327,12 +327,12 @@ const SCENES: Scene[] = [
           '   █          █     ',
           '   █          █     ',
           '   █          █     ',
-          '   █          █     ',
           '   ████████████     ',
           '                    ',
           '         ___        ',
           '        /o o\\       ',
           '        | ‿ |       ',
+          '                    ',
           '                    ',
         ],
         subtitle: 'WELCOME TO BOLDSPACE.',
@@ -343,13 +343,13 @@ const SCENES: Scene[] = [
           '   ╔══════════════╗  ',
           '   ║              ║  ',
           '   ║  BOLDSPACE.  ║  ',
-          '   ║              ║  ',
           '   ║ BUILD PUBLIC ║  ',
           '   ║ FIND PEOPLE  ║  ',
           '   ║              ║  ',
           '   ╚══════════════╝  ',
           '         ___        ',
           '        /*_*\\       ',
+          '                    ',
           '                    ',
         ],
         subtitle: 'the person clicks.',
@@ -376,7 +376,7 @@ const SCENES: Scene[] = [
   {
     episode: 'EP. 06',
     title: 'the builders',
-    frameDuration: 600,
+    frameDuration: 850,
     frames: [
       {
         art: [
@@ -415,11 +415,11 @@ const SCENES: Scene[] = [
       {
         art: [
           '  [■]──[■]──[■]──[■]',
-          '   |╲   |   |   ╱|  ',
+          '   |\\   |   |   /|  ',
           '  [■]──[■]──[■]──[■]',
-          '   |   ╲|  |╱   |   ',
+          '   |   \\|   |/   |  ',
           '  [■]──[■]──[■]──[■]',
-          '   |  ╱ |   | ╲  |  ',
+          '   |  / |   | \\  |  ',
           '  [■]──[■]──[■]──[■]',
           '                    ',
           '   NO SPECTATORS.   ',
@@ -434,7 +434,7 @@ const SCENES: Scene[] = [
   {
     episode: 'EP. 07',
     title: 'the first build',
-    frameDuration: 600,
+    frameDuration: 800,
     frames: [
       {
         art: [
@@ -455,17 +455,17 @@ const SCENES: Scene[] = [
       },
       {
         art: [
-          '    🚀              ',
-          '       /\\           ',
-          '      /  \\          ',
-          '     / !! \\         ',
-          '    /______\\        ',
-          '    |      |        ',
-          '~~~~|      |~~~~    ',
-          '    |      |        ',
-          ' ┌──┴──────┴──┐     ',
-          ' │  SHIPPED.  │     ',
-          ' └────────────┘     ',
+          '                    ',
+          '         /\\         ',
+          '        /  \\        ',
+          '       / !! \\       ',
+          '      /______\\      ',
+          '      |      |      ',
+          '  ~~~~|      |~~~~  ',
+          '   ┌──┴──────┴──┐   ',
+          '   │  SHIPPED.  │   ',
+          '   └────────────┘   ',
+          '                    ',
           '                    ',
         ],
         subtitle: "it's imperfect. people cheer anyway.",
@@ -476,11 +476,11 @@ const SCENES: Scene[] = [
           '        /*_*\\       ',
           '        \\o/         ',
           '     → → → →        ',
-          '       /   \\        ',
           '                    ',
           '   ✦ CONGRATS! ✦    ',
           '  ✦ FIRST BUILD ✦   ',
           '   ✦ SHIPPED!  ✦    ',
+          '                    ',
           '                    ',
           '                    ',
           '                    ',
@@ -492,7 +492,7 @@ const SCENES: Scene[] = [
   {
     episode: 'EP. 08',
     title: 'the open world',
-    frameDuration: 550,
+    frameDuration: 800,
     frames: [
       {
         art: [
@@ -550,7 +550,7 @@ const SCENES: Scene[] = [
   {
     episode: 'EP. 09',
     title: 'the invitation',
-    frameDuration: 700,
+    frameDuration: 900,
     frames: [
       {
         art: [
@@ -591,10 +591,10 @@ const SCENES: Scene[] = [
           '        ████        ',
           '  ┌─────████─┐      ',
           '  │     ████ │      ',
-          '  │     ████ │      ',
-          '  │     ████ │      ',
-          '  │     ████ │      ',
-          '  │     ████ │      ',
+          '  │  ENTER   │      ',
+          '  │   THE    │      ',
+          '  │  OPEN    │      ',
+          '  │  WORLD   │      ',
           '  └──── ───────┘    ',
           '                    ',
           '         ___        ',
@@ -607,11 +607,11 @@ const SCENES: Scene[] = [
         art: [
           '       ░░░░░░░      ',
           '  ┌────░░░░░░░─┐    ',
-          '  │    ░ ENTER ░│    ',
-          '  │    ░  THE  ░│    ',
-          '  │    ░  OPEN ░│    ',
-          '  │    ░ WORLD ░│    ',
-          '  │    ░░░░░░░  │    ',
+          '  │    ░ ENTER ░│   ',
+          '  │    ░  THE  ░│   ',
+          '  │    ░  OPEN ░│   ',
+          '  │    ░ WORLD ░│   ',
+          '  │    ░░░░░░░  │   ',
           '  └──── ───────┘    ',
           '                    ',
           '           ▌        ',
@@ -624,72 +624,80 @@ const SCENES: Scene[] = [
   },
 ];
 
+const FADE_DURATION = 200; // ms for crossfade
+
 export default function AsciiStory() {
   const [sceneIndex, setSceneIndex] = useState(0);
   const [frameIndex, setFrameIndex] = useState(0);
-  const [sceneVisible, setSceneVisible] = useState(true);
-  const [subtitleVisible, setSubtitleVisible] = useState(false);
+  const [artOpacity, setArtOpacity] = useState(1);
+  const [subtitleOpacity, setSubtitleOpacity] = useState(1);
+  const [sceneOpacity, setSceneOpacity] = useState(1);
+
+  // Store displayed content separately so we swap AFTER fade-out
+  const [displayedArt, setDisplayedArt] = useState(SCENES[0].frames[0].art);
+  const [displayedSubtitle, setDisplayedSubtitle] = useState(SCENES[0].frames[0].subtitle);
+
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
-  const frameInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+  const frameTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const clear = () => {
     timers.current.forEach(clearTimeout);
     timers.current = [];
-    if (frameInterval.current) clearInterval(frameInterval.current);
+    if (frameTimer.current) clearInterval(frameTimer.current);
   };
 
   const after = (fn: () => void, ms: number) => {
     const t = setTimeout(fn, ms);
     timers.current.push(t);
-    return t;
   };
 
-  const scene = SCENES[sceneIndex];
-  const frame = scene.frames[frameIndex];
+  // Smooth crossfade to a new frame
+  const crossfadeToFrame = (newArt: string[], newSubtitle: string) => {
+    // fade out
+    setArtOpacity(0);
+    setSubtitleOpacity(0);
+    after(() => {
+      // swap content while invisible
+      setDisplayedArt(newArt);
+      setDisplayedSubtitle(newSubtitle);
+      // fade in
+      setArtOpacity(1);
+      setSubtitleOpacity(1);
+    }, FADE_DURATION);
+  };
 
   useEffect(() => {
     clear();
-    setSceneVisible(false);
+
+    const scene = SCENES[sceneIndex];
+    let fi = 0;
+
+    // show first frame immediately
+    crossfadeToFrame(scene.frames[0].art, scene.frames[0].subtitle);
     setFrameIndex(0);
-    setSubtitleVisible(false);
 
+    // cycle frames
+    frameTimer.current = setInterval(() => {
+      fi = (fi + 1) % scene.frames.length;
+      setFrameIndex(fi);
+      crossfadeToFrame(scene.frames[fi].art, scene.frames[fi].subtitle);
+    }, scene.frameDuration);
+
+    // advance scene
+    const totalDuration = scene.frameDuration * scene.frames.length * 3 + 1000;
     after(() => {
-      setSceneVisible(true);
-      after(() => setSubtitleVisible(true), 300);
-
-      // animate frames
-      let fi = 0;
-      frameInterval.current = setInterval(() => {
-        fi = (fi + 1) % scene.frames.length;
-        setFrameIndex(fi);
-        setSubtitleVisible(false);
-        setTimeout(() => setSubtitleVisible(true), 150);
-      }, scene.frameDuration * scene.frames.length);
-
-    }, 200);
-
-    // advance to next scene
-    const sceneDuration = scene.frameDuration * scene.frames.length * 3 + 1500;
-    after(() => {
-      setSceneVisible(false);
+      // fade out whole scene
+      setSceneOpacity(0);
       after(() => {
         setSceneIndex(p => (p + 1) % SCENES.length);
-      }, 600);
-    }, sceneDuration);
+        setSceneOpacity(1);
+      }, 500);
+    }, totalDuration);
 
     return clear;
   }, [sceneIndex]); // eslint-disable-line
 
-  // Frame-level animation independent of scene
-  useEffect(() => {
-    if (!sceneVisible) return;
-    const interval = setInterval(() => {
-      setSubtitleVisible(false);
-      setFrameIndex(p => (p + 1) % scene.frames.length);
-      setTimeout(() => setSubtitleVisible(true), 150);
-    }, scene.frameDuration);
-    return () => clearInterval(interval);
-  }, [sceneVisible, sceneIndex]); // eslint-disable-line
+  const scene = SCENES[sceneIndex];
 
   return (
     <div style={{
@@ -699,19 +707,11 @@ export default function AsciiStory() {
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden',
-      position: 'relative',
+      opacity: sceneOpacity,
+      transition: `opacity 0.5s ease`,
     }}>
-      <style>{`
-        @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
-        @keyframes slideUp {
-          from { opacity:0; transform:translateY(8px); }
-          to   { opacity:1; transform:translateY(0); }
-        }
-        .scene-fade { animation: fadeIn 0.5s ease forwards; }
-        .sub-slide  { animation: slideUp 0.25s ease forwards; }
-      `}</style>
 
-      {/* ── Top letterbox bar */}
+      {/* ── Top bar */}
       <div style={{
         height: '13%',
         backgroundColor: '#000',
@@ -729,8 +729,6 @@ export default function AsciiStory() {
           letterSpacing: '0.15em',
           color: 'rgba(255,255,255,0.3)',
           textTransform: 'uppercase',
-          opacity: sceneVisible ? 1 : 0,
-          transition: 'opacity 0.4s ease',
         }}>
           {scene.episode}
         </span>
@@ -741,54 +739,47 @@ export default function AsciiStory() {
           letterSpacing: '-0.02em',
           color: '#fff',
           textTransform: 'lowercase',
-          opacity: sceneVisible ? 1 : 0,
-          transition: 'opacity 0.4s ease 0.1s',
         }}>
           {scene.title}
         </span>
-        {/* Progress dots */}
         <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
           {SCENES.map((_, i) => (
             <div key={i} style={{
               width: i === sceneIndex ? '16px' : '4px',
               height: '2px',
               backgroundColor: i === sceneIndex ? '#fff' : 'rgba(255,255,255,0.15)',
-              transition: 'all 0.4s ease',
+              transition: 'all 0.5s ease',
               borderRadius: '1px',
             }} />
           ))}
         </div>
       </div>
 
-      {/* ── Main film frame */}
+      {/* ── Main frame */}
       <div style={{
         flex: 1,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '8px 16px',
-        opacity: sceneVisible ? 1 : 0,
-        transition: 'opacity 0.5s ease',
       }}>
-        <pre
-          key={`${sceneIndex}-${frameIndex}`}
-          className="scene-fade"
-          style={{
-            fontFamily: "'Courier New', 'Lucida Console', monospace",
-            fontSize: '13px',
-            lineHeight: 1.65,
-            color: '#fff',
-            margin: 0,
-            textAlign: 'center',
-            userSelect: 'none',
-            whiteSpace: 'pre',
-          }}
-        >
-          {frame.art.join('\n')}
+        <pre style={{
+          fontFamily: "'Courier New', 'Lucida Console', monospace",
+          fontSize: '13px',
+          lineHeight: 1.65,
+          color: '#fff',
+          margin: 0,
+          textAlign: 'center',
+          userSelect: 'none',
+          whiteSpace: 'pre',
+          opacity: artOpacity,
+          transition: `opacity ${FADE_DURATION}ms ease`,
+        }}>
+          {displayedArt.join('\n')}
         </pre>
       </div>
 
-      {/* ── Bottom letterbox bar — subtitles */}
+      {/* ── Bottom subtitle bar */}
       <div style={{
         height: '16%',
         backgroundColor: '#000',
@@ -799,24 +790,20 @@ export default function AsciiStory() {
         flexShrink: 0,
         borderTop: '1px solid rgba(255,255,255,0.06)',
       }}>
-        {subtitleVisible && sceneVisible && (
-          <p
-            key={`sub-${sceneIndex}-${frameIndex}`}
-            className="sub-slide"
-            style={{
-              fontFamily: "'Instrument Sans', sans-serif",
-              fontWeight: 400,
-              fontStyle: 'italic',
-              fontSize: '13px',
-              lineHeight: 1.5,
-              color: 'rgba(255,255,255,0.55)',
-              textAlign: 'center',
-              margin: 0,
-            }}
-          >
-            {frame.subtitle}
-          </p>
-        )}
+        <p style={{
+          fontFamily: "'Instrument Sans', sans-serif",
+          fontWeight: 400,
+          fontStyle: 'italic',
+          fontSize: '13px',
+          lineHeight: 1.5,
+          color: 'rgba(255,255,255,0.55)',
+          textAlign: 'center',
+          margin: 0,
+          opacity: subtitleOpacity,
+          transition: `opacity ${FADE_DURATION}ms ease`,
+        }}>
+          {displayedSubtitle}
+        </p>
       </div>
     </div>
   );
