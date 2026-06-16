@@ -2,7 +2,8 @@
 
 import { useEffect } from 'react';
 import Script from 'next/script';
-import AsciiStory from './components/AsciiStory';
+
+import Constellation from './components/Constellation';
 
 export default function Home() {
   useEffect(() => {
@@ -195,17 +196,17 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ─── Right Panel — ASCII Story ─── */}
+      {/* ─── Right Panel — Constellation Canvas ─── */}
       <div
         style={{
           position: 'relative',
           flex: 1,
           height: '100%',
           backgroundColor: '#000',
-          borderLeft: '1px solid rgba(255, 255, 255, 0.06)',
+          overflow: 'hidden',
         }}
       >
-        <AsciiStory />
+        <Constellation />
       </div>
     </div>
   );
