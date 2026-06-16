@@ -41,17 +41,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '100%',
-        height: '100vh',
-        backgroundColor: '#000',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'row',
-      }}
-    >
+    <div className="relative w-full min-h-screen md:h-screen bg-black overflow-hidden flex flex-col md:flex-row">
       {/* PostHog Analytics Script */}
       <Script
         id="posthog-script"
@@ -65,21 +55,7 @@ export default function Home() {
       />
 
       {/* ─── Left Panel ─── */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          width: '35%',
-          minWidth: '320px',
-          height: '100%',
-          backgroundColor: '#000',
-          padding: '30px 40px 60px 40px',
-          flexShrink: 0,
-        }}
-      >
+      <div className="relative z-10 flex flex-col justify-between w-full md:w-[35%] md:min-w-[320px] min-h-[60vh] md:h-full bg-black px-6 py-10 md:px-10 md:py-[60px] md:pt-[30px] flex-shrink-0">
         {/* Logo — top left */}
         <div>
           <style>{`
@@ -95,75 +71,39 @@ export default function Home() {
             }
           `}</style>
           <span
-            style={{
-              fontFamily: 'Manrope, sans-serif',
-              fontWeight: 800,
-              fontSize: '22px',
-              letterSpacing: '-0.04em',
-              color: '#fff',
-              textTransform: 'lowercase',
-            }}
+            className="font-extrabold text-[22px] tracking-[-0.04em] text-white lowercase"
+            style={{ fontFamily: 'Manrope, sans-serif' }}
           >
             boldspace<span className="logo-dot">.</span>
           </span>
         </div>
 
         {/* Bottom content block */}
-        <div>
+        <div className="mt-12 md:mt-0">
           {/* Heading */}
           <h1
-            style={{
-              fontFamily: 'Manrope, sans-serif',
-              fontWeight: 800,
-              fontSize: '64px',
-              lineHeight: 1.1,
-              letterSpacing: '-0.04em',
-              color: '#fff',
-              margin: '0 0 16px 0',
-              textTransform: 'lowercase',
-            }}
+            className="font-extrabold text-5xl md:text-[64px] leading-[1.1] tracking-[-0.04em] text-white mb-4 lowercase"
+            style={{ fontFamily: 'Manrope, sans-serif' }}
           >
             hi. this was boldspace.
           </h1>
 
           {/* Description */}
           <p
-            style={{
-              fontFamily: "'Instrument Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: '18px',
-              lineHeight: 1.6,
-              color: 'rgba(255, 255, 255, 0.45)',
-              margin: '0 0 32px 0',
-              maxWidth: '420px',
-            }}
+            className="font-normal text-base md:text-[18px] leading-[1.6] text-white/45 mb-8 max-w-[420px]"
+            style={{ fontFamily: "'Instrument Sans', sans-serif" }}
           >
             we were the biggest school in the world for people who wanted to work on their own ideas — ty for the memories. love you.
           </p>
 
           {/* Buttons — inline, side by side */}
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
+          <div className="flex flex-col sm:flex-row gap-3">
             {/* Primary button — white fill */}
             <a
               href="/letter"
               id="read-manifesto-btn"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '14px 24px',
-                backgroundColor: '#fff',
-                color: '#000',
-                fontFamily: "'Instrument Sans', sans-serif",
-                fontWeight: 600,
-                fontSize: '16px',
-                lineHeight: 1,
-                textDecoration: 'none',
-                whiteSpace: 'nowrap',
-                border: 'none',
-                borderRadius: '0',
-                cursor: 'pointer',
-              }}
+              className="inline-flex items-center justify-center px-6 py-[14px] bg-white text-black font-semibold text-[16px] leading-none no-underline whitespace-nowrap cursor-pointer hover:bg-gray-200 transition-colors"
+              style={{ fontFamily: "'Instrument Sans', sans-serif" }}
             >
               read our manifesto
             </a>
@@ -172,23 +112,8 @@ export default function Home() {
             <a
               href="https://boldspace.so"
               id="join-boldspace-home-btn"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '14px 24px',
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                color: '#fff',
-                fontFamily: "'Instrument Sans', sans-serif",
-                fontWeight: 600,
-                fontSize: '16px',
-                lineHeight: 1,
-                textDecoration: 'none',
-                whiteSpace: 'nowrap',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: '0',
-                cursor: 'pointer',
-              }}
+              className="inline-flex items-center justify-center px-6 py-[14px] bg-white/5 text-white font-semibold text-[16px] leading-none no-underline whitespace-nowrap border border-white/15 cursor-pointer hover:bg-white/10 transition-colors"
+              style={{ fontFamily: "'Instrument Sans', sans-serif" }}
             >
               join boldspace →
             </a>
@@ -197,15 +122,7 @@ export default function Home() {
       </div>
 
       {/* ─── Right Panel — Constellation Canvas ─── */}
-      <div
-        style={{
-          position: 'relative',
-          flex: 1,
-          height: '100%',
-          backgroundColor: '#000',
-          overflow: 'hidden',
-        }}
-      >
+      <div className="relative flex-1 min-h-[40vh] md:h-full bg-black overflow-hidden border-t border-white/10 md:border-t-0 md:border-l border-white/10">
         <Constellation />
       </div>
     </div>
