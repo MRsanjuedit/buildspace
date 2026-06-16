@@ -39,7 +39,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative w-full min-h-screen bg-black overflow-hidden">
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100vh',
+        backgroundColor: '#000',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'row',
+      }}
+    >
       {/* PostHog Analytics Script */}
       <Script
         id="posthog-script"
@@ -52,70 +62,143 @@ export default function Home() {
         }}
       />
 
-      {/* Background Pattern */}
+      {/* ─── Left Panel ─── */}
       <div
-        className="absolute inset-0 opacity-8 pointer-events-none"
         style={{
-          backgroundImage: "url('https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png')",
-          backgroundSize: '64px',
-          backgroundRepeat: 'repeat',
+          position: 'relative',
+          zIndex: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          width: '35%',
+          minWidth: '320px',
+          height: '100%',
+          backgroundColor: '#000',
+          padding: '30px 40px 60px 40px',
+          flexShrink: 0,
         }}
-      />
-
-      {/* Header with Logo */}
-      <header className="absolute top-0 left-0 right-0 h-16 z-20 flex items-center px-6">
-        <div className="w-10 h-10">
-          {/* <svg viewBox="0 0 235 200" className="w-full h-full fill-black">
+      >
+        {/* Logo — top left */}
+        <div>
+          <svg
+            viewBox="0 0 235 200"
+            style={{ width: '26px', height: '26px', fill: '#fff' }}
+          >
             <path d="m94.005 16.289 9.332-9.734c6.691-7.787 19.567-9.414 27.769-.608l98.837 106.12c8.145 8.745 6.021 22.797-4.345 28.744l-98.837 56.701c-6.811 3.907-14.546 2.957-20.123-1.067L9.325 140.618c-10.366-5.947-12.49-19.999-4.345-28.744a11.812 11.812 0 0 1 14.55-2.179l87.108 50.119v-37.648L49.802 89.674c-8.026-4.643-9.659-15.539-3.348-22.33l.012-.013.009-.01a14.441 14.441 0 0 1 17.779-2.654l42.384 24.013V52.34l-13.484-8.485c-8.26-4.77-15.716-9.779-9.215-16.758l10.066-10.808Z" />
-          </svg> */}
+          </svg>
         </div>
-      </header>
 
-      {/* Hero Section */}
-      <div className="relative w-full h-screen bg-black overflow-hidden flex items-end">
-        {/* Video Background */}
+        {/* Bottom content block */}
+        <div>
+          {/* Heading */}
+          <h1
+            style={{
+              fontFamily: 'Manrope, sans-serif',
+              fontWeight: 800,
+              fontSize: '64px',
+              lineHeight: 1.1,
+              letterSpacing: '-0.04em',
+              color: '#fff',
+              margin: '0 0 16px 0',
+              textTransform: 'lowercase',
+            }}
+          >
+            hi. this was boldspace.
+          </h1>
+
+          {/* Description */}
+          <p
+            style={{
+              fontFamily: "'Instrument Sans', sans-serif",
+              fontWeight: 400,
+              fontSize: '18px',
+              lineHeight: 1.6,
+              color: 'rgba(255, 255, 255, 0.45)',
+              margin: '0 0 32px 0',
+              maxWidth: '420px',
+            }}
+          >
+            we were the biggest school in the world for people who wanted to work on their own ideas — ty for the memories. love you.
+          </p>
+
+          {/* Buttons — inline, side by side */}
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
+            {/* Primary button — white fill */}
+            <a
+              href="/letter"
+              id="read-manifesto-btn"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '14px 24px',
+                backgroundColor: '#fff',
+                color: '#000',
+                fontFamily: "'Instrument Sans', sans-serif",
+                fontWeight: 600,
+                fontSize: '16px',
+                lineHeight: 1,
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                border: 'none',
+                borderRadius: '0',
+                cursor: 'pointer',
+              }}
+            >
+              read our manifesto
+            </a>
+
+            {/* Secondary button — outline */}
+            <a
+              href="https://boldspace.so"
+              id="join-boldspace-home-btn"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '14px 24px',
+                backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                color: '#fff',
+                fontFamily: "'Instrument Sans', sans-serif",
+                fontWeight: 600,
+                fontSize: '16px',
+                lineHeight: 1,
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                borderRadius: '0',
+                cursor: 'pointer',
+              }}
+            >
+              join boldspace →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Right Panel — Video ─── */}
+      <div
+        style={{
+          position: 'relative',
+          flex: 1,
+          height: '100%',
+          overflow: 'hidden',
+        }}
+      >
         <video
           src="https://framerusercontent.com/assets/sRXQsZpCuTpukMUfotGcRUuvg.mp4"
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: 0.5 }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
         />
-
-        {/* Text Overlay at Bottom */}
-        <div className="relative z-10 w-full px-6 sm:px-8 md:px-16 py-8 md:py-12 bg-gradient-to-t from-black via-black/80 to-transparent pb-16">
-          <div className="max-w-md">
-            {/* Heading */}
-            <h1
-              className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4 md:mb-6 leading-tight lowercase"
-              style={{ fontFamily: 'Manrope, sans-serif', letterSpacing: '-0.04em' }}
-            >
-              hi. this was boldspace.
-            </h1>
-
-            {/* Description */}
-            <p
-              className="text-base sm:text-lg md:text-xl text-gray-400/60 mb-6 md:mb-8 leading-relaxed"
-              style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 500 }}
-            >
-              we were the biggest school in the world for people who wanted to work on their own ideas — ty for the memories. love you.
-            </p>
-
-            {/* Buttons */}
-            <div className="space-y-3">
-              {/* Primary Button */}
-              <a
-                href="/letter"
-                className="block w-full bg-white text-black font-bold text-center py-3 sm:py-4 text-sm sm:text-base hover:bg-gray-100 transition-colors duration-200"
-                style={{ fontFamily: 'Manrope, sans-serif', fontSize: '20px' }}
-              >
-                read final letter
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -323,9 +323,45 @@ export default function LetterPage() {
             <br />
             <br />— sanju
           </p>
+
+          {/* Join Boldspace CTA */}
+          <div className="mt-12 sm:mt-16 mb-4 flex flex-col items-start gap-3">
+            <a
+              href="/"
+              id="join-boldspace-btn"
+              className="join-boldspace-btn"
+            >
+              join boldspace →
+            </a>
+          </div>
         </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .join-boldspace-btn {
+          display: inline-block;
+          padding: 14px 32px;
+          background: #000;
+          color: #fff;
+          font-family: Manrope, sans-serif;
+          font-size: 1rem;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          border-radius: 999px;
+          text-decoration: none;
+          transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+        }
+        .join-boldspace-btn:hover {
+          background: #111;
+          transform: translateY(-2px) scale(1.03);
+          box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+        .join-boldspace-btn:active {
+          transform: translateY(0) scale(0.99);
+        }
+      `}</style>
 
       {/* Thank You Video Footer */}
       <div className="w-screen aspect-video md:aspect-auto md:h-screen flex items-center justify-center bg-black">
