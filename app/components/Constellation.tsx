@@ -179,9 +179,34 @@ export default function Constellation() {
 
     // Main animation loop
     function animate() {
-      if (!ctx) return;
-      // Clear canvas with slight trail effect (optional, remove for clean look)
-      ctx.fillStyle = 'rgba(0, 0, 0, 1)'; // Solid clear
+      if (!ctx || !canvas) return;
+
+      // Robust resize check every frame (handles Next.js remounts/visibility changes perfectly)
+      const parent = canvas.parentElement;
+      if (parent) {
+        const currentWidth = parent.clientWidth;
+        const currentHeight = parent.clientHeight;
+        
+        if (canvas.width !== currentWidth || canvas.height !== currentHeight) {
+          width = currentWidth;
+          height = currentHeight;
+          canvas.width = width;
+          canvas.height = height;
+          
+          if (width > 0 && height > 0) {
+            initParticles();
+          }
+        }
+      }
+
+      // If dimensions are invalid, skip drawing
+      if (width === 0 || height === 0) {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
+
+      // Clear canvas
+      ctx.fillStyle = 'rgba(0, 0, 0, 1)';
       ctx.fillRect(0, 0, width, height);
 
       // Update and draw particles
@@ -195,40 +220,6 @@ export default function Constellation() {
       drawMouseConnections();
 
       animationId = requestAnimationFrame(animate);
-    }
-
-    let resizeObserver: ResizeObserver;
-
-    // Resize handler
-    function handleResize(entries?: ResizeObserverEntry[]) {
-      if (!canvas) return;
-      
-      let newWidth = width;
-      let newHeight = height;
-
-      if (entries && entries.length > 0) {
-        newWidth = entries[0].contentRect.width;
-        newHeight = entries[0].contentRect.height;
-      } else {
-        const parent = canvas.parentElement;
-        if (parent) {
-          newWidth = parent.clientWidth;
-          newHeight = parent.clientHeight;
-        }
-      }
-
-      // Re-init if size actually changed or particles are empty
-      if (newWidth !== width || newHeight !== height || particles.length === 0) {
-        width = newWidth;
-        height = newHeight;
-        canvas.width = width;
-        canvas.height = height;
-        
-        // Prevent re-init loop if width/height are still 0
-        if (width > 0 && height > 0) {
-          initParticles();
-        }
-      }
     }
 
     // Mouse handlers
@@ -265,14 +256,7 @@ export default function Constellation() {
     // Boot
     function init() {
       optimizeForDevice();
-      handleResize();
       animate();
-
-      const parent = canvas?.parentElement;
-      if (parent && typeof ResizeObserver !== 'undefined') {
-        resizeObserver = new ResizeObserver(handleResize);
-        resizeObserver.observe(parent);
-      }
 
       // Event listeners
       window.addEventListener('mousemove', handleMouseMove);
@@ -286,9 +270,6 @@ export default function Constellation() {
 
     return () => {
       cancelAnimationFrame(animationId);
-      if (resizeObserver) {
-        resizeObserver.disconnect();
-      }
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('touchmove', handleTouchMove);
