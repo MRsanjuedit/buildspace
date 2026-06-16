@@ -202,7 +202,7 @@ export default function Home() {
           flex: 1,
           height: '100%',
           backgroundColor: '#000',
-          borderLeft: '1px solid rgba(0, 255, 136, 0.08)',
+          borderLeft: '1px solid rgba(255, 255, 255, 0.06)',
         }}
       >
         <AsciiStory />
