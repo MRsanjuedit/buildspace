@@ -186,68 +186,50 @@ const SCENES: Scene[] = [
 ];
 
 export default function AsciiStory() {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(27.78);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [sceneIdx, setSceneIdx] = useState(0);
+  const [phase, setPhase] = useState<'enter' | 'show' | 'exit'>('enter');
+  const [visibleLines, setVisibleLines] = useState(0);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-        setHasInteracted(true);
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration || 27.78);
-    const handleEnded = () => setIsPlaying(false);
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-
-    audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('loadedmetadata', updateDuration);
-    audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('play', handlePlay);
-    audio.addEventListener('pause', handlePause);
-
-    return () => {
-      audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('loadedmetadata', updateDuration);
-      audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('play', handlePlay);
-      audio.removeEventListener('pause', handlePause);
-    };
+  const clear = useCallback(() => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
   }, []);
 
-  // Calculate global progress (0 to 1)
-  const globalProgress = Math.min(currentTime / duration, 1);
-  
-  // Calculate which scene we are in
-  const rawSceneIndex = globalProgress * SCENES.length;
-  const sceneIdx = Math.min(Math.floor(rawSceneIndex), SCENES.length - 1);
-  const scene = SCENES[sceneIdx] || SCENES[0];
+  const delay = useCallback((fn: () => void, ms: number) => {
+    timers.current.push(setTimeout(fn, ms));
+  }, []);
 
-  // Calculate progress *within* the current scene (0 to 1)
-  const sceneProgress = rawSceneIndex - sceneIdx;
+  const scene = SCENES[sceneIdx];
 
-  // Determine opacity for crossfades (fade in first 10%, fade out last 10%)
-  let opacity = 1;
-  if (sceneProgress < 0.1) opacity = sceneProgress / 0.1;
-  else if (sceneProgress > 0.9) opacity = (1 - sceneProgress) / 0.1;
+  useEffect(() => {
+    clear();
+    setPhase('enter');
+    setVisibleLines(0);
 
-  // Determine how many lines are visible (reveal sequentially)
-  const lineThreshold = 0.8 / scene.lines.length; // use 80% of the scene time to reveal lines
-  const visibleLines = Math.floor((sceneProgress - 0.1) / lineThreshold) + 1;
+    // enter → show
+    delay(() => {
+      setPhase('show');
+
+      // reveal lines
+      scene.lines.forEach((_, i) => {
+        delay(() => setVisibleLines(i + 1), 400 + i * 600);
+      });
+
+      // exit
+      const hold = 400 + scene.lines.length * 600 + 2000;
+      delay(() => {
+        setPhase('exit');
+        delay(() => {
+          setSceneIdx(p => (p + 1) % SCENES.length);
+        }, 800);
+      }, hold);
+    }, 300);
+
+    return clear;
+  }, [sceneIdx, clear, delay]); // eslint-disable-line
+
+  const opacity = phase === 'show' ? 1 : 0;
 
   return (
     <div style={{
@@ -257,44 +239,7 @@ export default function AsciiStory() {
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden',
-      position: 'relative',
     }}>
-      <audio ref={audioRef} src="/story-audio.webm" preload="auto" />
-
-      {/* ── Overlay Play Button (if not interacted yet) ── */}
-      {!hasInteracted && (
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundColor: 'rgba(0,0,0,0.6)',
-          backdropFilter: 'blur(4px)',
-          zIndex: 50,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          <button 
-            onClick={togglePlay}
-            style={{
-              padding: '16px 32px',
-              backgroundColor: '#fff',
-              color: '#000',
-              fontFamily: "'Instrument Sans', sans-serif",
-              fontWeight: 600,
-              fontSize: '16px',
-              border: 'none',
-              cursor: 'pointer',
-              borderRadius: '2px',
-              display: 'flex',
-              gap: '8px',
-              alignItems: 'center',
-            }}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            play audio experience
-          </button>
-        </div>
-      )}
 
       {/* ── Header bar ── */}
       <div style={{
@@ -305,29 +250,18 @@ export default function AsciiStory() {
         borderBottom: '1px solid rgba(255,255,255,0.06)',
         flexShrink: 0,
       }}>
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-          <button onClick={togglePlay} style={{
-            background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: 0, display: 'flex', opacity: 0.5
-          }}>
-            {isPlaying ? (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            ) : (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            )}
-          </button>
-          <span style={{
-            fontFamily: "'Instrument Sans', sans-serif",
-            fontWeight: 400,
-            fontSize: '11px',
-            letterSpacing: '0.12em',
-            color: 'rgba(255,255,255,0.25)',
-            textTransform: 'uppercase',
-            opacity: hasInteracted ? opacity : 0,
-            transition: 'opacity 0.2s ease',
-          }}>
-            {scene.id} / {String(SCENES.length).padStart(2, '0')}
-          </span>
-        </div>
+        <span style={{
+          fontFamily: "'Instrument Sans', sans-serif",
+          fontWeight: 400,
+          fontSize: '11px',
+          letterSpacing: '0.12em',
+          color: 'rgba(255,255,255,0.25)',
+          textTransform: 'uppercase',
+          opacity,
+          transition: 'opacity 0.6s ease',
+        }}>
+          {scene.id} / {String(SCENES.length).padStart(2, '0')}
+        </span>
 
         {/* Progress */}
         <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
@@ -356,7 +290,8 @@ export default function AsciiStory() {
           color: '#fff',
           textTransform: 'lowercase',
           margin: 0,
-          opacity: hasInteracted ? opacity : 0,
+          opacity,
+          transition: 'opacity 0.7s ease 0.1s',
         }}>
           {scene.title}
         </h2>
@@ -369,7 +304,8 @@ export default function AsciiStory() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '0 28px',
-        opacity: hasInteracted ? opacity : 0,
+        opacity,
+        transition: 'opacity 0.8s ease 0.2s',
       }}>
         <pre style={{
           fontFamily: "'Courier New', monospace",
@@ -405,9 +341,9 @@ export default function AsciiStory() {
             lineHeight: 1.5,
             color: 'rgba(255,255,255,0.45)',
             margin: 0,
-            opacity: hasInteracted && i < visibleLines ? 1 : 0,
-            transform: hasInteracted && i < visibleLines ? 'translateY(0)' : 'translateY(6px)',
-            transition: 'opacity 0.2s ease, transform 0.2s ease',
+            opacity: i < visibleLines ? 1 : 0,
+            transform: i < visibleLines ? 'translateY(0)' : 'translateY(6px)',
+            transition: 'opacity 0.5s ease, transform 0.5s ease',
           }}>
             {line}
           </p>
