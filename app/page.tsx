@@ -194,30 +194,15 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ─── Right Panel — Video ─── */}
+      {/* ─── Right Panel — placeholder for constellation canvas ─── */}
       <div
         style={{
           position: 'relative',
           flex: 1,
           height: '100%',
-          overflow: 'hidden',
+          backgroundColor: '#000',
         }}
-      >
-        <video
-          src="https://framerusercontent.com/assets/sRXQsZpCuTpukMUfotGcRUuvg.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        />
-      </div>
+      />
     </div>
   );
 }
