@@ -1,703 +1,235 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-
-interface AnimFrame {
-  art: string[];
-  subtitle: string;
-}
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 interface Scene {
-  episode: string;
+  id: string;
   title: string;
-  frameDuration: number;
-  frames: AnimFrame[];
+  art: string;
+  lines: string[];
 }
 
 const SCENES: Scene[] = [
   {
-    episode: 'EP. 01',
-    title: 'the scroll',
-    frameDuration: 900,
-    frames: [
-      {
-        art: [
-          '                    ',
-          '         ___        ',
-          '        /- -\\       ',
-          '        |~_~|       ',
-          '         \\_/        ',
-          '      ---|---|---    ',
-          '     /           \\  ',
-          '    [  ─────────  ] ',
-          '    [  ─────────  ] ',
-          '    [  ─────────  ] ',
-          '    [─────────────] ',
-          '                    ',
-        ],
-        subtitle: 'a dark room. one person. one screen.',
-      },
-      {
-        art: [
-          '                    ',
-          '         ___        ',
-          '        /- -\\       ',
-          '        |- -|       ',
-          '         \\_/        ',
-          '      ---|---|---    ',
-          '     /           \\  ',
-          '    [  ▒▒▒▒▒▒▒▒▒  ] ',
-          '    [  ─────────  ] ',
-          '    [  ▒▒▒▒▒▒▒▒▒  ] ',
-          '    [─────────────] ',
-          '                    ',
-        ],
-        subtitle: 'endless feeds. endless content.',
-      },
-      {
-        art: [
-          '                    ',
-          '         ___        ',
-          '        /x x\\       ',
-          '        |─_─|       ',
-          '         \\_/        ',
-          '      ---|---|---    ',
-          '     /           \\  ',
-          '    [  ▓▓▓▓▓▓▓▓▓  ] ',
-          '    [  ▓▓▓▓▓▓▓▓▓  ] ',
-          '    [  ▒▒▒▒▒▒▒▒▒  ] ',
-          '    [─────────────] ',
-          '                    ',
-        ],
-        subtitle: 'hours pass. nothing changes.',
-      },
-      {
-        art: [
-          '                    ',
-          '         ___        ',
-          '        /- -\\       ',
-          '        |~_~|       ',
-          '         \\_/        ',
-          '      ---|---|---    ',
-          '     /           \\  ',
-          '    [ ─────────── ] ',
-          '    [             ] ',
-          '    [  there has  ] ',
-          '    [─to be more"─] ',
-          '                    ',
-        ],
-        subtitle: '"there has to be more than this."',
-      },
+    id: '01',
+    title: 'the screen',
+    art: `
+     ┌─────────────────┐
+     │                 │
+     │    ░░░░░░░░░    │
+     │    ░░░░░░░░░    │
+     │    ░░░░░░░░░    │
+     │                 │
+     └────────┬────────┘
+              │
+           ┌──┴──┐
+           └─────┘`,
+    lines: [
+      'you sit alone in a room.',
+      'the screen glows.',
+      'scroll. scroll. scroll.',
+      'nothing changes.',
     ],
   },
   {
-    episode: 'EP. 02',
-    title: 'the idea',
-    frameDuration: 850,
-    frames: [
-      {
-        art: [
-          '                    ',
-          '                    ',
-          '         ___        ',
-          '        /o o\\       ',
-          '        | ‿ |       ',
-          '         \\_/        ',
-          '          |         ',
-          '        ──────      ',
-          '        [desk]      ',
-          '        ──────      ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'a tiny spark appears above the desk.',
-      },
-      {
-        art: [
-          '          ·         ',
-          '        · ✦ ·       ',
-          '         ___        ',
-          '        /o o\\       ',
-          '        | ‿ |       ',
-          '         \\_/        ',
-          '          |         ',
-          '        ──────      ',
-          '        [desk]      ',
-          '        ──────      ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'not a startup. not a business plan.',
-      },
-      {
-        art: [
-          '        ✦ ✺ ✦       ',
-          '       ✦  ✺  ✦      ',
-          '         ___        ',
-          '        /O O\\       ',
-          '        | O |       ',
-          '         \\_/        ',
-          '          |         ',
-          '        ──────      ',
-          '        [desk]      ',
-          '        ──────      ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'just an idea. small. fragile.',
-      },
-      {
-        art: [
-          '      ✦✦ ✺ ✦✦       ',
-          '     ✦  ✦✺✦  ✦      ',
-          '      ✦✦ ✺ ✦✦       ',
-          '         ___        ',
-          '        /*_*\\       ',
-          '        | ‿ |       ',
-          '         \\_/        ',
-          '        /   \\       ',
-          '        ──────      ',
-          '        [desk]      ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'impossible to ignore.',
-      },
+    id: '02',
+    title: 'the thought',
+    art: `
+
+
+            ◇
+
+
+     "there has to be
+      more than this."
+
+
+`,
+    lines: [
+      'a thought you can\'t shake.',
+      'not a business plan.',
+      'just a feeling —',
+      'that you were meant to build.',
     ],
   },
   {
-    episode: 'EP. 03',
-    title: 'the wall',
-    frameDuration: 850,
-    frames: [
-      {
-        art: [
-          '                    ',
-          '         ___        ',
-          '        /o o\\       ',
-          '        | ‿ |       ',
-          '         \\_/        ',
-          '        /   \\       ',
-          '        |   |       ',
-          '       →→→→→        ',
-          '                    ',
-          '    ████████████    ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'the world responds.',
-      },
-      {
-        art: [
-          '                    ',
-          '         ___        ',
-          '        /> <\\       ',
-          '        |─_─|       ',
-          '         \\_/        ',
-          '    \\   /   \\       ',
-          '     \\ |   |        ',
-          '      ×→→→→→        ',
-          '                    ',
-          '    ████████████    ',
-          '    █ TOO EARLY █   ',
-          '    ████████████    ',
-        ],
-        subtitle: '"you\'re too early. wait until you\'re ready."',
-      },
-      {
-        art: [
-          '                    ',
-          '       ___          ',
-          '      /; ;\\         ',
-          '      |T_T|         ',
-          '       \\_/          ',
-          '       \\ |          ',
-          '        |\\          ',
-          '    ←←←← \\         ',
-          '                    ',
-          '    ████████████    ',
-          '    █ WAIT....  █   ',
-          '    ████████████    ',
-        ],
-        subtitle: 'the spark flickers. almost gone.',
-      },
-      {
-        art: [
-          '          ·✦·       ',
-          '       ___          ',
-          '      /> <\\         ',
-          '      | ‿ |         ',
-          '       \\_/          ',
-          '       / \\          ',
-          '       | |          ',
-          '      ──────        ',
-          '                    ',
-          '    ████████████    ',
-          '    ████████████    ',
-          '                    ',
-        ],
-        subtitle: 'but the idea refuses to disappear.',
-      },
+    id: '03',
+    title: 'the noise',
+    art: `
+     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+     ▓                   ▓
+     ▓   "too early."    ▓
+     ▓   "not ready."    ▓
+     ▓   "be realistic." ▓
+     ▓                   ▓
+     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓`,
+    lines: [
+      'everyone has an opinion.',
+      'too early. too late.',
+      'someone already did it.',
+      'the idea almost dies.',
     ],
   },
   {
-    episode: 'EP. 04',
-    title: 'the search',
-    frameDuration: 900,
-    frames: [
-      {
-        art: [
-          '  [▪][▪][▪][▪][+]   ',
-          '  ┌──────────────┐  ',
-          '  │ > how to     │  ',
-          '  │   build _    │  ',
-          '  ├──────────────┤  ',
-          '  │ tutorial #47 │  ',
-          '  │ ██████░░░░░  │  ',
-          '  └──────────────┘  ',
-          '         ___        ',
-          '        /- -\\       ',
-          '        |- -|       ',
-          '                    ',
-        ],
-        subtitle: 'late nights. open tabs.',
-      },
-      {
-        art: [
-          '  [▪][▪][▪][▪][+]   ',
-          '  ┌──────────────┐  ',
-          '  │ > how to     │  ',
-          '  │   build _    │  ',
-          '  ├──────────────┤  ',
-          '  │ tutorial #48 │  ',
-          '  │ ████░░░░░░░  │  ',
-          '  └──────────────┘  ',
-          '         ___        ',
-          '        /~_~\\       ',
-          '        |~_~|       ',
-          '                    ',
-        ],
-        subtitle: 'the person searches for others like them.',
-      },
-      {
-        art: [
-          '  [▪][▪][▪][▪][+]   ',
-          '  ┌──────────────┐  ',
-          '  │ > nobody     │  ',
-          '  │   nearby _   │  ',
-          '  ├──────────────┤  ',
-          '  │ 0 results    │  ',
-          '  │              │  ',
-          '  └──────────────┘  ',
-          '         ___        ',
-          '        /; ;\\       ',
-          '        |T_T|       ',
-          '                    ',
-        ],
-        subtitle: 'nobody nearby understands.',
-      },
+    id: '04',
+    title: 'the spark',
+    art: `
+
+
+
+
+            ✦
+
+
+
+`,
+    lines: [
+      'but it doesn\'t.',
+      'small. stubborn. alive.',
+      'the spark stays.',
+      'waiting for you to move.',
     ],
   },
   {
-    episode: 'EP. 05',
-    title: 'the signal',
-    frameDuration: 800,
-    frames: [
-      {
-        art: [
-          '                    ',
-          '   ·    ·    ·      ',
-          '       ·    ·       ',
-          '   ·        ·       ',
-          '       ·    ·       ',
-          '   ·    ·    ·      ',
-          '                    ',
-          '         ___        ',
-          '        /- -\\       ',
-          '        |─_─|       ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'a message appears in the darkness.',
-      },
-      {
-        art: [
-          '                    ',
-          '   ████████████     ',
-          '   █          █     ',
-          '   █          █     ',
-          '   █          █     ',
-          '   ████████████     ',
-          '                    ',
-          '         ___        ',
-          '        /o o\\       ',
-          '        | ‿ |       ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'WELCOME TO BOLDSPACE.',
-      },
-      {
-        art: [
-          '                    ',
-          '   ╔══════════════╗  ',
-          '   ║              ║  ',
-          '   ║  BOLDSPACE.  ║  ',
-          '   ║ BUILD PUBLIC ║  ',
-          '   ║ FIND PEOPLE  ║  ',
-          '   ║              ║  ',
-          '   ╚══════════════╝  ',
-          '         ___        ',
-          '        /*_*\\       ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'the person clicks.',
-      },
-      {
-        art: [
-          '    ·  [■]  ·  [■]  ',
-          '   ╔══════════════╗  ',
-          '   ║  BOLDSPACE.  ║  ',
-          '   ║ BUILD PUBLIC ║  ',
-          '   ╚══════════════╝  ',
-          '  [■]  ·  [■]  ·    ',
-          '    ·  [■]  ·  [■]  ',
-          '                    ',
-          '         ___        ',
-          '        /*_*\\       ',
-          '        \\o/         ',
-          '                    ',
-        ],
-        subtitle: 'lights begin turning on around the world.',
-      },
+    id: '05',
+    title: 'the door',
+    art: `
+     ┌─────────────────┐
+     │                 │
+     │                 │
+     │   b o l d       │
+     │   s p a c e .   │
+     │                 │
+     │                 │
+     └─────────────────┘`,
+    lines: [
+      'a place appears.',
+      'not a course. not a lecture.',
+      'a room full of people',
+      'who think like you.',
     ],
   },
   {
-    episode: 'EP. 06',
-    title: 'the builders',
-    frameDuration: 850,
-    frames: [
-      {
-        art: [
-          '                    ',
-          '  [■]──[■]──[■]     ',
-          '   |    |    |      ',
-          '  [■]──[■]──[■]     ',
-          '   |    |    |      ',
-          '  [■]──[■]──[■]     ',
-          '                    ',
-          '         ___        ',
-          '        /o o\\       ',
-          '        | ‿ |       ',
-          '        \\o/         ',
-          '                    ',
-        ],
-        subtitle: 'developers. designers. creators. founders.',
-      },
-      {
-        art: [
-          '                    ',
-          '  [■]──[■]──[■]──[■]',
-          '   |    |    |    | ',
-          '  [■]──[■]──[■]──[■]',
-          '   |    |    |    | ',
-          '  [■]──[■]──[■]──[■]',
-          '   |    |    |    | ',
-          '  [■]──[■]──[■]──[■]',
-          '                    ',
-          '         ___        ',
-          '        /*_*\\       ',
-          '                    ',
-        ],
-        subtitle: 'strangers becoming teammates.',
-      },
-      {
-        art: [
-          '  [■]──[■]──[■]──[■]',
-          '   |\\   |   |   /|  ',
-          '  [■]──[■]──[■]──[■]',
-          '   |   \\|   |/   |  ',
-          '  [■]──[■]──[■]──[■]',
-          '   |  / |   | \\  |  ',
-          '  [■]──[■]──[■]──[■]',
-          '                    ',
-          '   NO SPECTATORS.   ',
-          '   ONLY BUILDERS.   ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'no spectators. only builders.',
-      },
+    id: '06',
+    title: 'the room',
+    art: `
+        ■ ─ ■ ─ ■
+        │   │   │
+        ■ ─ ■ ─ ■
+        │   │   │
+        ■ ─ ■ ─ ■`,
+    lines: [
+      'builders. makers. dreamers.',
+      'strangers who become teammates.',
+      'ideas shared at 2am.',
+      'no spectators allowed.',
     ],
   },
   {
-    episode: 'EP. 07',
-    title: 'the first build',
-    frameDuration: 800,
-    frames: [
-      {
-        art: [
-          '                    ',
-          '          /\\        ',
-          '         /  \\       ',
-          '        / !! \\      ',
-          '       /______\\     ',
-          '       |      |     ',
-          '   ~~~~|      |~~~~ ',
-          '       |      |     ',
-          '    ┌──┴──────┴──┐  ',
-          '    │  BUILDING  │  ',
-          '    └────────────┘  ',
-          '                    ',
-        ],
-        subtitle: 'an unfinished project ships.',
-      },
-      {
-        art: [
-          '                    ',
-          '         /\\         ',
-          '        /  \\        ',
-          '       / !! \\       ',
-          '      /______\\      ',
-          '      |      |      ',
-          '  ~~~~|      |~~~~  ',
-          '   ┌──┴──────┴──┐   ',
-          '   │  SHIPPED.  │   ',
-          '   └────────────┘   ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: "it's imperfect. people cheer anyway.",
-      },
-      {
-        art: [
-          '         ___        ',
-          '        /*_*\\       ',
-          '        \\o/         ',
-          '     → → → →        ',
-          '                    ',
-          '   ✦ CONGRATS! ✦    ',
-          '  ✦ FIRST BUILD ✦   ',
-          '   ✦ SHIPPED!  ✦    ',
-          '                    ',
-          '                    ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'ideas become products. products become companies.',
-      },
+    id: '07',
+    title: 'the ship',
+    art: `
+
+     ┌─────────────────┐
+     │                 │
+     │    shipped.     │
+     │                 │
+     └─────────────────┘
+
+`,
+    lines: [
+      'you build something.',
+      'it\'s rough. imperfect.',
+      'but it\'s real.',
+      'and people notice.',
     ],
   },
   {
-    episode: 'EP. 08',
-    title: 'the open world',
-    frameDuration: 800,
-    frames: [
-      {
-        art: [
-          '  ·  [■]  ·  [■] ·  ',
-          ' [■]  ·  [■]  ·  [■]',
-          '  ·  [■]  ·  [■] ·  ',
-          ' [■]  ·  [■]  ·  [■]',
-          '  ·  [■]  ·  [■] ·  ',
-          ' [■]  ·  [■]  ·  [■]',
-          '  ·  [■]  ·  [■] ·  ',
-          '                    ',
-          '  BUILDERS WORLDWIDE',
-          '      2:00 AM       ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'thousands of lights across the globe.',
-      },
-      {
-        art: [
-          ' ✦[■]✦[■]✦[■]✦[■]✦ ',
-          '[■]✦[■]✦[■]✦[■]✦[■]',
-          ' ✦[■]✦[■]✦[■]✦[■]✦ ',
-          '[■]✦[■]✦[■]✦[■]✦[■]',
-          ' ✦[■]✦[■]✦[■]✦[■]✦ ',
-          '[■]✦[■]✦[■]✦[■]✦[■]',
-          ' ✦[■]✦[■]✦[■]✦[■]✦ ',
-          '                    ',
-          ' NO PERMISSION.     ',
-          ' NO GATEKEEPERS.    ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'no permission. no gatekeepers.',
-      },
-      {
-        art: [
-          ' ✦[■]✦[■]✦[■]✦[■]✦ ',
-          '[■]✦[■]✦[■]✦[■]✦[■]',
-          ' ✦[■]✦[■]✦[■]✦[■]✦ ',
-          '                    ',
-          ' THE INTERNET HAS   ',
-          ' ENOUGH SPECTATORS. ',
-          '                    ',
-          ' WE NEED MORE       ',
-          ' BUILDERS.          ',
-          '                    ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'we need more builders.',
-      },
+    id: '08',
+    title: 'the network',
+    art: `
+      ■ ─ ■ ─ ■ ─ ■ ─ ■
+      │   │   │   │   │
+      ■ ─ ■ ─ ■ ─ ■ ─ ■
+      │   │   │   │   │
+      ■ ─ ■ ─ ■ ─ ■ ─ ■
+      │   │   │   │   │
+      ■ ─ ■ ─ ■ ─ ■ ─ ■`,
+    lines: [
+      'one room becomes a thousand.',
+      'ideas become companies.',
+      'strangers become cofounders.',
+      'the network grows.',
     ],
   },
   {
-    episode: 'EP. 09',
+    id: '09',
     title: 'the invitation',
-    frameDuration: 900,
-    frames: [
-      {
-        art: [
-          '                    ',
-          '  ┌────────────┐    ',
-          '  │            │    ',
-          '  │            │    ',
-          '  │            │    ',
-          '  │            │    ',
-          '  │            │    ',
-          '  └──── ───────┘    ',
-          '                    ',
-          '         ___        ',
-          '        /o o\\       ',
-          '        | ‿ |       ',
-        ],
-        subtitle: 'the camera returns to the first room.',
-      },
-      {
-        art: [
-          '         ░░░        ',
-          '  ┌──────░░░──┐     ',
-          '  │      ░░░  │     ',
-          '  │      ░░░  │     ',
-          '  │      ░░░  │     ',
-          '  │      ░░░  │     ',
-          '  │      ░░░  │     ',
-          '  └──── ───────┘    ',
-          '                    ',
-          '         ___        ',
-          '        /O O\\       ',
-          '        | ‿ |       ',
-        ],
-        subtitle: "the person isn't alone. the door is open.",
-      },
-      {
-        art: [
-          '        ████        ',
-          '  ┌─────████─┐      ',
-          '  │     ████ │      ',
-          '  │  ENTER   │      ',
-          '  │   THE    │      ',
-          '  │  OPEN    │      ',
-          '  │  WORLD   │      ',
-          '  └──── ───────┘    ',
-          '                    ',
-          '         ___        ',
-          '        /*_*\\       ',
-          '        \\o/         ',
-        ],
-        subtitle: 'a cursor blinks. waiting.',
-      },
-      {
-        art: [
-          '       ░░░░░░░      ',
-          '  ┌────░░░░░░░─┐    ',
-          '  │    ░ ENTER ░│   ',
-          '  │    ░  THE  ░│   ',
-          '  │    ░  OPEN ░│   ',
-          '  │    ░ WORLD ░│   ',
-          '  │    ░░░░░░░  │   ',
-          '  └──── ───────┘    ',
-          '                    ',
-          '           ▌        ',
-          '                    ',
-          '                    ',
-        ],
-        subtitle: 'build something unforgettable.',
-      },
+    art: `
+
+
+
+     the internet has
+     enough spectators.
+
+     we need builders.
+
+
+`,
+    lines: [
+      'this is boldspace.',
+      'the open world for builders.',
+      'your idea is waiting.',
+      'enter.',
     ],
   },
 ];
 
-const FADE_DURATION = 200; // ms for crossfade
-
 export default function AsciiStory() {
-  const [sceneIndex, setSceneIndex] = useState(0);
-  const [frameIndex, setFrameIndex] = useState(0);
-  const [artOpacity, setArtOpacity] = useState(1);
-  const [subtitleOpacity, setSubtitleOpacity] = useState(1);
-  const [sceneOpacity, setSceneOpacity] = useState(1);
-
-  // Store displayed content separately so we swap AFTER fade-out
-  const [displayedArt, setDisplayedArt] = useState(SCENES[0].frames[0].art);
-  const [displayedSubtitle, setDisplayedSubtitle] = useState(SCENES[0].frames[0].subtitle);
-
+  const [sceneIdx, setSceneIdx] = useState(0);
+  const [phase, setPhase] = useState<'enter' | 'show' | 'exit'>('enter');
+  const [visibleLines, setVisibleLines] = useState(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
-  const frameTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const clear = () => {
+  const clear = useCallback(() => {
     timers.current.forEach(clearTimeout);
     timers.current = [];
-    if (frameTimer.current) clearInterval(frameTimer.current);
-  };
+  }, []);
 
-  const after = (fn: () => void, ms: number) => {
-    const t = setTimeout(fn, ms);
-    timers.current.push(t);
-  };
+  const delay = useCallback((fn: () => void, ms: number) => {
+    timers.current.push(setTimeout(fn, ms));
+  }, []);
 
-  // Smooth crossfade to a new frame
-  const crossfadeToFrame = (newArt: string[], newSubtitle: string) => {
-    // fade out
-    setArtOpacity(0);
-    setSubtitleOpacity(0);
-    after(() => {
-      // swap content while invisible
-      setDisplayedArt(newArt);
-      setDisplayedSubtitle(newSubtitle);
-      // fade in
-      setArtOpacity(1);
-      setSubtitleOpacity(1);
-    }, FADE_DURATION);
-  };
+  const scene = SCENES[sceneIdx];
 
   useEffect(() => {
     clear();
+    setPhase('enter');
+    setVisibleLines(0);
 
-    const scene = SCENES[sceneIndex];
-    let fi = 0;
+    // enter → show
+    delay(() => {
+      setPhase('show');
 
-    // show first frame immediately
-    crossfadeToFrame(scene.frames[0].art, scene.frames[0].subtitle);
-    setFrameIndex(0);
+      // reveal lines
+      scene.lines.forEach((_, i) => {
+        delay(() => setVisibleLines(i + 1), 400 + i * 600);
+      });
 
-    // cycle frames
-    frameTimer.current = setInterval(() => {
-      fi = (fi + 1) % scene.frames.length;
-      setFrameIndex(fi);
-      crossfadeToFrame(scene.frames[fi].art, scene.frames[fi].subtitle);
-    }, scene.frameDuration);
-
-    // advance scene
-    const totalDuration = scene.frameDuration * scene.frames.length * 3 + 1000;
-    after(() => {
-      // fade out whole scene
-      setSceneOpacity(0);
-      after(() => {
-        setSceneIndex(p => (p + 1) % SCENES.length);
-        setSceneOpacity(1);
-      }, 500);
-    }, totalDuration);
+      // exit
+      const hold = 400 + scene.lines.length * 600 + 2000;
+      delay(() => {
+        setPhase('exit');
+        delay(() => {
+          setSceneIdx(p => (p + 1) % SCENES.length);
+        }, 800);
+      }, hold);
+    }, 300);
 
     return clear;
-  }, [sceneIndex]); // eslint-disable-line
+  }, [sceneIdx, clear, delay]); // eslint-disable-line
 
-  const scene = SCENES[sceneIndex];
+  const opacity = phase === 'show' ? 1 : 0;
 
   return (
     <div style={{
@@ -707,103 +239,115 @@ export default function AsciiStory() {
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden',
-      opacity: sceneOpacity,
-      transition: `opacity 0.5s ease`,
     }}>
 
-      {/* ── Top bar */}
+      {/* ── Header bar ── */}
       <div style={{
-        height: '13%',
-        backgroundColor: '#000',
+        padding: '20px 28px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 24px',
-        flexShrink: 0,
         borderBottom: '1px solid rgba(255,255,255,0.06)',
+        flexShrink: 0,
       }}>
         <span style={{
-          fontFamily: 'Manrope, sans-serif',
-          fontWeight: 800,
+          fontFamily: "'Instrument Sans', sans-serif",
+          fontWeight: 400,
           fontSize: '11px',
-          letterSpacing: '0.15em',
-          color: 'rgba(255,255,255,0.3)',
+          letterSpacing: '0.12em',
+          color: 'rgba(255,255,255,0.25)',
           textTransform: 'uppercase',
+          opacity,
+          transition: 'opacity 0.6s ease',
         }}>
-          {scene.episode}
+          {scene.id} / {String(SCENES.length).padStart(2, '0')}
         </span>
-        <span style={{
-          fontFamily: 'Manrope, sans-serif',
-          fontWeight: 800,
-          fontSize: '13px',
-          letterSpacing: '-0.02em',
-          color: '#fff',
-          textTransform: 'lowercase',
-        }}>
-          {scene.title}
-        </span>
-        <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+
+        {/* Progress */}
+        <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
           {SCENES.map((_, i) => (
             <div key={i} style={{
-              width: i === sceneIndex ? '16px' : '4px',
+              width: i === sceneIdx ? '20px' : '4px',
               height: '2px',
-              backgroundColor: i === sceneIndex ? '#fff' : 'rgba(255,255,255,0.15)',
-              transition: 'all 0.5s ease',
+              backgroundColor: i === sceneIdx ? '#fff' : 'rgba(255,255,255,0.12)',
               borderRadius: '1px',
+              transition: 'all 0.6s ease',
             }} />
           ))}
         </div>
       </div>
 
-      {/* ── Main frame */}
+      {/* ── Scene title ── */}
+      <div style={{
+        padding: '24px 28px 0',
+        flexShrink: 0,
+      }}>
+        <h2 style={{
+          fontFamily: 'Manrope, sans-serif',
+          fontWeight: 800,
+          fontSize: '20px',
+          letterSpacing: '-0.03em',
+          color: '#fff',
+          textTransform: 'lowercase',
+          margin: 0,
+          opacity,
+          transition: 'opacity 0.7s ease 0.1s',
+        }}>
+          {scene.title}
+        </h2>
+      </div>
+
+      {/* ── Art area ── */}
       <div style={{
         flex: 1,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '8px 16px',
+        padding: '0 28px',
+        opacity,
+        transition: 'opacity 0.8s ease 0.2s',
       }}>
         <pre style={{
-          fontFamily: "'Courier New', 'Lucida Console', monospace",
-          fontSize: '13px',
-          lineHeight: 1.65,
-          color: '#fff',
+          fontFamily: "'Courier New', monospace",
+          fontSize: '12px',
+          lineHeight: 1.55,
+          color: 'rgba(255,255,255,0.85)',
           margin: 0,
           textAlign: 'center',
           userSelect: 'none',
           whiteSpace: 'pre',
-          opacity: artOpacity,
-          transition: `opacity ${FADE_DURATION}ms ease`,
         }}>
-          {displayedArt.join('\n')}
+          {scene.art}
         </pre>
       </div>
 
-      {/* ── Bottom subtitle bar */}
+      {/* ── Story text ── */}
       <div style={{
-        height: '16%',
-        backgroundColor: '#000',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '0 28px',
+        padding: '0 28px 32px',
         flexShrink: 0,
+        minHeight: '120px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        gap: '6px',
         borderTop: '1px solid rgba(255,255,255,0.06)',
+        paddingTop: '20px',
       }}>
-        <p style={{
-          fontFamily: "'Instrument Sans', sans-serif",
-          fontWeight: 400,
-          fontStyle: 'italic',
-          fontSize: '13px',
-          lineHeight: 1.5,
-          color: 'rgba(255,255,255,0.55)',
-          textAlign: 'center',
-          margin: 0,
-          opacity: subtitleOpacity,
-          transition: `opacity ${FADE_DURATION}ms ease`,
-        }}>
-          {displayedSubtitle}
-        </p>
+        {scene.lines.map((line, i) => (
+          <p key={`${sceneIdx}-${i}`} style={{
+            fontFamily: "'Instrument Sans', sans-serif",
+            fontWeight: 400,
+            fontSize: '14px',
+            lineHeight: 1.5,
+            color: 'rgba(255,255,255,0.45)',
+            margin: 0,
+            opacity: i < visibleLines ? 1 : 0,
+            transform: i < visibleLines ? 'translateY(0)' : 'translateY(6px)',
+            transition: 'opacity 0.5s ease, transform 0.5s ease',
+          }}>
+            {line}
+          </p>
+        ))}
       </div>
     </div>
   );
