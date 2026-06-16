@@ -197,19 +197,38 @@ export default function Constellation() {
       animationId = requestAnimationFrame(animate);
     }
 
+    let resizeObserver: ResizeObserver;
+
     // Resize handler
-    function handleResize() {
+    function handleResize(entries?: ResizeObserverEntry[]) {
       if (!canvas) return;
-      const parent = canvas.parentElement;
-      if (parent) {
-        width = parent.clientWidth;
-        height = parent.clientHeight;
-        canvas.width = width;
-        canvas.height = height;
+      
+      let newWidth = width;
+      let newHeight = height;
+
+      if (entries && entries.length > 0) {
+        newWidth = entries[0].contentRect.width;
+        newHeight = entries[0].contentRect.height;
+      } else {
+        const parent = canvas.parentElement;
+        if (parent) {
+          newWidth = parent.clientWidth;
+          newHeight = parent.clientHeight;
+        }
       }
 
-      // Re-init on massive resize to prevent particles stuck off-screen
-      if (particles.length === 0) initParticles();
+      // Re-init if size actually changed or particles are empty
+      if (newWidth !== width || newHeight !== height || particles.length === 0) {
+        width = newWidth;
+        height = newHeight;
+        canvas.width = width;
+        canvas.height = height;
+        
+        // Prevent re-init loop if width/height are still 0
+        if (width > 0 && height > 0) {
+          initParticles();
+        }
+      }
     }
 
     // Mouse handlers
@@ -247,11 +266,15 @@ export default function Constellation() {
     function init() {
       optimizeForDevice();
       handleResize();
-      initParticles();
       animate();
 
+      const parent = canvas?.parentElement;
+      if (parent && typeof ResizeObserver !== 'undefined') {
+        resizeObserver = new ResizeObserver(handleResize);
+        resizeObserver.observe(parent);
+      }
+
       // Event listeners
-      window.addEventListener('resize', handleResize);
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseleave', handleMouseLeave);
       window.addEventListener('touchmove', handleTouchMove, { passive: true });
@@ -263,7 +286,9 @@ export default function Constellation() {
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', handleResize);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('touchmove', handleTouchMove);

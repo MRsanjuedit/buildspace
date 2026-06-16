@@ -55,7 +55,7 @@ export default function Home() {
       />
 
       {/* ─── Left Panel ─── */}
-      <div className="relative z-10 flex flex-col justify-between w-full md:w-[35%] md:min-w-[320px] min-h-[60vh] md:h-full bg-black px-6 py-10 md:px-10 md:py-[60px] md:pt-[30px] flex-shrink-0">
+      <div className="relative z-10 flex flex-col justify-between w-full md:w-[35%] md:min-w-[320px] min-h-screen md:h-full bg-black px-6 py-10 md:px-10 md:py-[60px] md:pt-[30px] flex-shrink-0">
         {/* Logo — top left */}
         <div>
           <style>{`
@@ -100,7 +100,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3">
             {/* Primary button — white fill */}
             <a
-              href="/letter"
+              href="/manifesto"
               id="read-manifesto-btn"
               className="inline-flex items-center justify-center px-6 py-[14px] bg-white text-black font-semibold text-[16px] leading-none no-underline whitespace-nowrap cursor-pointer hover:bg-gray-200 transition-colors"
               style={{ fontFamily: "'Instrument Sans', sans-serif" }}
@@ -122,7 +122,7 @@ export default function Home() {
       </div>
 
       {/* ─── Right Panel — Constellation Canvas ─── */}
-      <div className="relative flex-1 min-h-[40vh] md:h-full bg-black overflow-hidden border-t border-white/10 md:border-t-0 md:border-l border-white/10">
+      <div className="hidden md:block relative flex-1 h-full bg-black overflow-hidden border-l border-white/10">
         <Constellation />
       </div>
     </div>
