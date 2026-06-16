@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Script from 'next/script';
+import ReflectiveCard from './components/ReflectiveCard';
 
 export default function Home() {
   useEffect(() => {
@@ -194,15 +195,31 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ─── Right Panel — placeholder for constellation canvas ─── */}
+      {/* ─── Right Panel — ReflectiveCard ─── */}
       <div
         style={{
           position: 'relative',
           flex: 1,
           height: '100%',
           backgroundColor: '#000',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
-      />
+      >
+        <ReflectiveCard
+          overlayColor="rgba(0, 0, 0, 0.2)"
+          blurStrength={10}
+          glassDistortion={15}
+          metalness={0.8}
+          roughness={0.5}
+          displacementStrength={25}
+          noiseScale={1.5}
+          specularConstant={2.0}
+          grayscale={0.5}
+          color="#ffffff"
+        />
+      </div>
     </div>
   );
 }
