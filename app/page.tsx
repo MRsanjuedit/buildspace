@@ -110,7 +110,7 @@ export default function Home() {
 
             {/* Secondary button — outline */}
             <a
-              href="https://boldspace.so"
+              href="/join"
               id="join-boldspace-home-btn"
               className="inline-flex items-center justify-center px-6 py-[14px] bg-white/5 text-white font-semibold text-[16px] leading-none no-underline whitespace-nowrap border border-white/15 cursor-pointer hover:bg-white/10 transition-colors"
               style={{ fontFamily: "'Instrument Sans', sans-serif" }}
