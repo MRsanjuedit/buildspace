@@ -187,7 +187,8 @@ export default function Constellation() {
         const currentWidth = parent.clientWidth;
         const currentHeight = parent.clientHeight;
         
-        if (canvas.width !== currentWidth || canvas.height !== currentHeight) {
+        // Always re-sync dimensions and initialize if particles are missing
+        if (width !== currentWidth || height !== currentHeight || particles.length === 0) {
           width = currentWidth;
           height = currentHeight;
           canvas.width = width;
@@ -200,7 +201,7 @@ export default function Constellation() {
       }
 
       // If dimensions are invalid, skip drawing
-      if (width === 0 || height === 0) {
+      if (!width || !height || width === 0 || height === 0) {
         animationId = requestAnimationFrame(animate);
         return;
       }
